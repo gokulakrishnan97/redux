@@ -5,15 +5,20 @@
 // import * as serviceWorker from './serviceWorker';
 // import 'node_modules/bootstrap/dist/css'
 import store from './store/store';
+import { bugAdd, bugDelete, bugUpdate } from './store/bugs';
 
 console.log(store.getState());
 
-store.dispatch({
-  type: 'bugAdded',
-  payload: {
-    description: 'bug1'
-  }
-});
+store.subscribe(() => {
+  console.log(store.getState());
+})
+
+store.dispatch(bugAdd({description: 'bug1'}));
+store.dispatch(bugAdd({description: 'bug2'}));
+store.dispatch(bugAdd({description: 'bug3'}));
+store.dispatch(bugAdd({description: 'bug4'}));
+store.dispatch(bugUpdate({id:3}));
+store.dispatch(bugDelete({id:2}));
 
 console.log(store.getState());
 
